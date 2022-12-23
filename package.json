@@ -16,7 +16,7 @@
     "template": "keepachangelog",
     "unreleased": true,
     "commitLimit": false,
-    "ignoreCommitPattern": "^(build|chore|ci|docs|refactor|style|test|Initial.*|Merge.*)"
+    "ignoreCommitPattern": "^(build|chore|ci|docs|refactor|style|test|Initial.*|initial.*|Merge.*)"
   },
   "repository": {
     "type": "git",
