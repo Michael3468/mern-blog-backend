@@ -1,6 +1,6 @@
 {
   "name": "blog-fullstack-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -31,6 +31,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "git-flow": "^0.2.0",
+    "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
