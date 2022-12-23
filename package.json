@@ -8,7 +8,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cm": "cz",
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "version": "auto-changelog -p && git add HISTORY.md"
+  },
+  "auto-changelog": {
+    "output": "HISTORY.md",
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": false,
+    "ignoreCommitPattern": "^(build|chore|ci|docs|refactor|style|test|Initial.*|Merge.*)"
   },
   "repository": {
     "type": "git",
@@ -26,6 +34,7 @@
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
+    "auto-changelog": "^2.4.0",
     "commitizen": "^4.2.6",
     "cz-conventional-changelog": "^3.3.0"
   },
