@@ -1,5 +1,14 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+
+mongoose
+  .set('strictQuery', false)
+  .connect(
+    'mongodb+srv://user432654:D2da5Hsg9Iu43F8mf@cluster0.b13o4kt.mongodb.net/?retryWrites=true&w=majority'
+  )
+  .then(() => console.log('DataBase: Ok'))
+  .catch((err) => console.log('DataBase error: ', err));
 
 const app = express();
 
