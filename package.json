@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/WhiteDevilMan/blog-fullstack-app#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "express": "^4.18.2",
     "express-validator": "^6.14.2",
     "git-flow": "^0.2.0",
