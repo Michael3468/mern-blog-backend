@@ -8,6 +8,7 @@ import { registerValidation } from './validations/auth.js';
 
 import UserModel from './models/User.js';
 
+// init server +
 mongoose
   .set('strictQuery', false)
   .connect(
@@ -27,6 +28,7 @@ app.listen(4444, (err) => {
 
   console.log('Server started: OK');
 });
+// init server -
 
 // server test +
 app.get('/', (req, res) => {
