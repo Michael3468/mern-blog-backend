@@ -7,7 +7,7 @@ import checkAuth from './utils/checkAuth.js';
 
 import * as UserController from './controllers/UserController.js';
 
-// init server +
+// server init +
 mongoose
   .set('strictQuery', false)
   .connect(
@@ -27,7 +27,7 @@ app.listen(4444, (err) => {
 
   console.log('Server started: OK');
 });
-// init server -
+// server init -
 
 // server test +
 app.get('/', (req, res) => {
