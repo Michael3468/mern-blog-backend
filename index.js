@@ -1,41 +1,24 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+
+import { registerValidation } from './validations/auth.js';
+
+import checkAuth from './utils/checkAuth.js';
+
+import * as UserController from './controllers/UserController.js';
+
+// server init +
+mongoose
+  .set('strictQuery', false)
+  .connect(
+    'mongodb+srv://user432654:D2da5Hsg9Iu43F8mf@cluster0.b13o4kt.mongodb.net/blog?retryWrites=true&w=majority',
+  )
+  .then(() => console.log('DataBase: Ok'))
+  .catch((err) => console.log('DataBase error: ', err));
 
 const app = express();
 
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Hello world');
-});
-
-app.post('/auth/login', (req, res) => {
-  /**
-   * 'req' in this case, json sended wia postman from 'Body - json'
-   * {
-   *   "email": "test@test.ru",
-   *   "password": "12345"
-   * }
-   *
-   */
-  console.log(req.body);
-
-  const encryptionString = 'RandomStringToEncryptToken_12345';
-
-  // encrypt to 'token' fields: email and fullName
-  const token = jwt.sign(
-    {
-      email: req.body.email,
-      fullName: 'Василий Пупкин',
-    },
-    encryptionString
-  );
-
-  res.json({
-    success: true,
-    token,
-  });
-});
 
 app.listen(4444, (err) => {
   if (err) {
@@ -44,3 +27,14 @@ app.listen(4444, (err) => {
 
   console.log('Server started: OK');
 });
+// server init -
+
+// server test +
+app.get('/', (req, res) => {
+  res.send('Hello world');
+});
+// server test -
+
+app.post('/auth/register', registerValidation, UserController.register);
+app.post('/auth/login', UserController.login);
+app.get('/auth/me', checkAuth, UserController.getMe);
