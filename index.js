@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
@@ -32,6 +33,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());
+app.use(cors());
 app.use('/uploads', express.static('uploads')); // use static folder 'uploads'
 
 app.listen(4444, (err) => {
