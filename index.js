@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -10,14 +13,12 @@ import { UserController, PostController } from './controllers/index.js';
 import { checkAuth, handleValidationErrors } from './utils/index.js';
 
 // server init +
-const USER = 'user432654';
-const PASSWORD = 'D2da5Hsg9Iu43F8mf';
 const DB_NAME = 'blog';
 
 mongoose
   .set('strictQuery', false)
   .connect(
-    `mongodb+srv://${USER}:${PASSWORD}@cluster0.b13o4kt.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.b13o4kt.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
   )
   .then(() => console.log('DataBase: Ok'))
   .catch((err) => console.log('DataBase error: ', err));
