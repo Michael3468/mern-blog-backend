@@ -20,8 +20,8 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.b13o4kt.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
   )
-  .then(() => console.log('DataBase: Ok'))
-  .catch((err) => console.log('DataBase error: ', err));
+  .then(() => console.log('DataBase connect:..[Ok]'))
+  .catch((err) => console.log('DataBase connect error: ', err));
 
 const app = express();
 
@@ -45,7 +45,7 @@ app.listen(4444, (err) => {
     return console.log(err);
   }
 
-  console.log('Server started: OK');
+  console.log('Server started:....[OK]');
 });
 // server init -
 
