@@ -1,4 +1,5 @@
-# blog-fullstack-app
+# mern-blog-backend
+
 Blog app created with MERN stack
 
 ```
