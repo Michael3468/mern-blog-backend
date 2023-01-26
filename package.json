@@ -1,5 +1,5 @@
 {
-  "name": "blog-fullstack-app",
+  "name": "mern-blog-backend",
   "version": "0.13.0",
   "description": "",
   "main": "index.js",
@@ -20,14 +20,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WhiteDevilMan/blog-fullstack-app.git"
+    "url": "git+https://github.com/WhiteDevilMan/mern-blog-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WhiteDevilMan/blog-fullstack-app/issues"
+    "url": "https://github.com/WhiteDevilMan/mern-blog-backend/issues"
   },
-  "homepage": "https://github.com/WhiteDevilMan/blog-fullstack-app#readme",
+  "homepage": "https://github.com/WhiteDevilMan/mern-blog-backend#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
