@@ -1,6 +1,8 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+import fs from 'fs';
+
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -13,13 +15,9 @@ import { UserController, PostController } from './controllers/index.js';
 import { checkAuth, handleValidationErrors } from './utils/index.js';
 
 // server init +
-const DB_NAME = 'blog';
-
 mongoose
   .set('strictQuery', false)
-  .connect(
-    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.b13o4kt.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log('DataBase connect:..[Ok]'))
   .catch((err) => console.log('DataBase connect error: ', err));
 
@@ -27,6 +25,9 @@ const app = express();
 
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
+    if (!fs.existsSync('uploads')) {
+      fs.mkdirSync('uploads');
+    }
     cb(null, 'uploads');
   },
   filename: (_, file, cb) => {
