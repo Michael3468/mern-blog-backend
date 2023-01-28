@@ -107,7 +107,27 @@ export const getOne = async (req, res) => {
   }
 };
 
+export const getAllSortedByDate = async (req, res) => {
+  try {
+    // TODO delete passwordHash (network tab, /new-posts request)
+    const posts = await PostModel.find().populate('user').sort({ createdAt: -1 });
+    res.json(posts);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: 'Не удалось получить статьи',
+    });
+  }
+};
+
+/**
+ * @deprecated since version 0.13.0.
+ * Will be deleted in version 2.x.x
+ * Use '.getAllSortedByDate' instead
+ * */
 export const getAll = async (req, res) => {
+  console.warn('WARNING! Calling deprecated function!');
   try {
     const posts = await PostModel.find().populate('user').exec();
 
