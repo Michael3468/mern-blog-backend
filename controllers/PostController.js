@@ -121,6 +121,19 @@ export const getAllSortedByDate = async (req, res) => {
   }
 };
 
+export const getAllSortedByPopularity = async (req, res) => {
+  try {
+    const posts = await PostModel.find().populate('user').sort({ viewsCount: -1 });
+    res.json(posts);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: 'Не удалось получить статьи',
+    });
+  }
+};
+
 /**
  * @deprecated since version 0.13.0.
  * Will be deleted in version 2.x.x
