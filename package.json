@@ -12,7 +12,8 @@
     "version": "auto-changelog -p && git add HISTORY.md",
     "release-same-version": "git flow release start next && git flow release finish -n next",
     "release-minor": "git flow release start next && npm version minor && git flow release finish -n next",
-    "release-patch": "git flow release start next && npm version patch && git flow release finish -n next"
+    "release-patch": "git flow release start next && npm version patch && git flow release finish -n next",
+    "push": "git checkout main && git push && git checkout develop && git push"
   },
   "auto-changelog": {
     "output": "HISTORY.md",
