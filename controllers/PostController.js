@@ -136,7 +136,9 @@ export const getAllSortedByPopularity = async (req, res) => {
 
 export const getAllWithTagByDate = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate('user').sort({ viewsCount: -1 });
+    const tagname = req.params.tagname;
+
+    const posts = await PostModel.find({ tags: tagname }).populate('user').sort({ viewsCount: -1 });
     res.json(posts);
   } catch (err) {
     console.log(err);
