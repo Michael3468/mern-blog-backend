@@ -10,7 +10,7 @@ import multer from 'multer';
 
 import { registerValidation, loginValidation, postCreateValidation } from './validations.js';
 
-import { UserController, PostController } from './controllers/index.js';
+import { UserController, PostController, CommentController } from './controllers/index.js';
 
 import { checkAuth, handleValidationErrors } from './utils/index.js';
 
@@ -74,6 +74,7 @@ app.get('/popular-posts', PostController.getAllSortedByPopularity);
 app.get('/posts/:id', PostController.getOne);
 app.get('/tags/:tagname', PostController.getAllWithTagByDate);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
+app.post('/comment-create', checkAuth, CommentController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
 app.patch(
   '/posts/:id',
