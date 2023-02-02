@@ -73,6 +73,7 @@ app.get('/posts', PostController.getAllSortedByDate);
 app.get('/popular-posts', PostController.getAllSortedByPopularity);
 app.get('/posts/:id', PostController.getOne);
 app.get('/tags/:tagname', PostController.getAllWithTagByDate);
+app.get('/post-comments/:id', CommentController.getCommentsByPostId);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 app.post('/comment-create', checkAuth, CommentController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
