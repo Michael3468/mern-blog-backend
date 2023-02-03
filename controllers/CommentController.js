@@ -14,7 +14,7 @@ export const create = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось создать комментарий',
+      message: 'Create comment failed',
     });
   }
 };
@@ -31,7 +31,20 @@ export const getCommentsByPostId = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось получить комментарии',
+      message: 'Fetch comments failed',
+    });
+  }
+};
+
+export const getLastComments = async (req, res) => {
+  try {
+    const comments = await CommentModel.find().populate('user').limit(5).sort({ createdAt: -1 });
+    res.json(comments);
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: 'Fetch comments failed',
     });
   }
 };
