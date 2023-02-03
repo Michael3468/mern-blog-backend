@@ -24,7 +24,7 @@ export const update = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось обновить статью',
+      message: 'Update post failed',
     });
   }
 };
@@ -42,13 +42,13 @@ export const remove = async (req, res) => {
           console.log(err);
 
           return res.status(500).json({
-            message: 'Не удалось вернуть статью',
+            message: 'Return post failed',
           });
         }
 
         if (!doc) {
           return res.status(404).json({
-            message: 'Статья не найдена',
+            message: 'Find post failed',
           });
         }
 
@@ -61,7 +61,7 @@ export const remove = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось удалить статью',
+      message: 'Remove post failed',
     });
   }
 };
@@ -85,13 +85,13 @@ export const getOne = async (req, res) => {
           console.log(err);
 
           return res.status(500).json({
-            message: 'Не удалось вернуть статью',
+            message: 'Return post failed',
           });
         }
 
         if (!doc) {
           return res.status(404).json({
-            message: 'Статья не найдена',
+            message: 'Find post failed',
           });
         }
 
@@ -102,7 +102,7 @@ export const getOne = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось получить статью',
+      message: 'Fetch post failed',
     });
   }
 };
@@ -116,7 +116,7 @@ export const getAllSortedByDate = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось получить статьи',
+      message: 'Fetch posts failed',
     });
   }
 };
@@ -129,7 +129,7 @@ export const getAllSortedByPopularity = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось получить статьи',
+      message: 'Fetch posts failed',
     });
   }
 };
@@ -143,7 +143,7 @@ export const getAllWithTagByDate = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: 'Не удалось получить статьи',
+      message: 'Fetch posts failed',
     });
   }
 };
@@ -163,7 +163,7 @@ export const getAll = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось получить статьи',
+      message: 'Fetch posts failed',
     });
   }
 };
@@ -181,7 +181,7 @@ export const getLastTags = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: 'Не удалось получить теги',
+      message: 'Fetch tags failed',
     });
   }
 };
@@ -203,7 +203,7 @@ export const create = async (req, res) => {
     console.log(err);
 
     res.status(500).json({
-      message: 'Не удалось создать статью',
+      message: 'Create post failed',
     });
   }
 };
