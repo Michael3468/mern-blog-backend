@@ -18,7 +18,7 @@ export const update = async (req, res) => {
     );
 
     res.json({
-      success: true,
+      message: 'Post updated',
     });
   } catch (err) {
     console.log(err);
@@ -53,7 +53,7 @@ export const remove = async (req, res) => {
         }
 
         res.json({
-          success: true,
+          message: 'Post deleted',
         });
       },
     );
