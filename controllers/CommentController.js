@@ -48,3 +48,46 @@ export const getLastComments = async (req, res) => {
     });
   }
 };
+
+export const removePostComments = async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    const comments = await CommentModel.find({ postId: postId });
+
+    if (!comments) return;
+
+    comments.forEach((item) => {
+      CommentModel.findOneAndDelete(
+        {
+          postId: item.postId,
+        },
+        (err, doc) => {
+          if (err) {
+            console.log(err);
+
+            return res.status(500).json({
+              message: 'Remove comment failed',
+            });
+          }
+
+          if (!doc) {
+            return res.status(404).json({
+              message: 'Find comment failed',
+            });
+          }
+        },
+      );
+    });
+
+    res.json({
+      message: 'Comment(s) deleted',
+    });
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).json({
+      message: 'Remove comments failed',
+    });
+  }
+};
