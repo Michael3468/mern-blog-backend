@@ -10,7 +10,7 @@ import multer from 'multer';
 
 import { registerValidation, loginValidation, postCreateValidation } from './validations.js';
 
-import { UserController, PostController } from './controllers/index.js';
+import { UserController, PostController, CommentController } from './controllers/index.js';
 
 import { checkAuth, handleValidationErrors } from './utils/index.js';
 
@@ -67,14 +67,17 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     url: `/uploads/${req.file.originalname}`,
   });
 });
-
 app.get('/tags', PostController.getLastTags);
 app.get('/posts', PostController.getAllSortedByDate);
 app.get('/popular-posts', PostController.getAllSortedByPopularity);
 app.get('/posts/:id', PostController.getOne);
 app.get('/tags/:tagname', PostController.getAllWithTagByDate);
+app.get('/post-comments/:id', CommentController.getCommentsByPostId);
+app.get('/last-comments', CommentController.getLastComments);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
+app.post('/comment-create', checkAuth, CommentController.create);
 app.delete('/posts/:id', checkAuth, PostController.remove);
+app.delete('/post-comments-remove/:id', CommentController.removePostComments);
 app.patch(
   '/posts/:id',
   checkAuth,
