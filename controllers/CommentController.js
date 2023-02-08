@@ -1,9 +1,12 @@
 import CommentModel from '../models/Comment.js';
+import PostModel from '../models/Post.js';
 
 export const create = async (req, res) => {
+  const postId = req.body.postId;
+
   try {
     const doc = new CommentModel({
-      postId: req.body.postId,
+      postId: postId,
       user: req.userId,
       text: req.body.text,
     });
@@ -17,6 +20,8 @@ export const create = async (req, res) => {
       message: 'Create comment failed',
     });
   }
+
+  updatePostCommentsCount(postId);
 };
 
 export const getCommentsByPostId = async (req, res) => {
@@ -89,5 +94,48 @@ export const removePostComments = async (req, res) => {
     res.status(500).json({
       message: 'Remove comments failed',
     });
+  }
+};
+
+/**
+ * example:
+ *
+ * updatePostCommentsCount(postId);
+ *
+ * updatePostCommentsCount(postId, -1)
+ *
+ * @param {*} postId
+ * @param {number} updateValue - 1 to increment, -1 to decrement
+ */
+const updatePostCommentsCount = (postId, updateValue = 1) => {
+  try {
+    PostModel.findOneAndUpdate(
+      {
+        _id: postId,
+      },
+      {
+        $inc: { commentsCount: updateValue },
+      },
+      {
+        returnDocument: 'after',
+      },
+      (err, doc) => {
+        if (err) {
+          console.log(err);
+
+          return res.status(500).json({
+            message: 'Return post failed',
+          });
+        }
+
+        if (!doc) {
+          return res.status(404).json({
+            message: 'Find post failed',
+          });
+        }
+      },
+    );
+  } catch (err) {
+    console.log(err);
   }
 };
