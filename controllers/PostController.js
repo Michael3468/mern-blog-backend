@@ -97,7 +97,7 @@ export const getOne = async (req, res) => {
 
         res.json(doc);
       },
-    ).populate('user');
+    ).populate('user', '_id fullName email avatarUrl');
   } catch (err) {
     console.log(err);
 
@@ -109,8 +109,10 @@ export const getOne = async (req, res) => {
 
 export const getAllSortedByDate = async (req, res) => {
   try {
-    // TODO delete passwordHash (network tab, /new-posts request)
-    const posts = await PostModel.find().populate('user').sort({ createdAt: -1 });
+    const posts = await PostModel.find()
+      .populate('user', '_id fullName email avatarUrl')
+      .sort({ createdAt: -1 });
+
     res.json(posts);
   } catch (err) {
     console.log(err);
@@ -123,7 +125,10 @@ export const getAllSortedByDate = async (req, res) => {
 
 export const getAllSortedByPopularity = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate('user').sort({ viewsCount: -1 });
+    const posts = await PostModel.find()
+      .populate('user', '_id fullName email avatarUrl')
+      .sort({ viewsCount: -1 });
+
     res.json(posts);
   } catch (err) {
     console.log(err);
@@ -138,7 +143,10 @@ export const getAllWithTagByDate = async (req, res) => {
   try {
     const tagname = req.params.tagname;
 
-    const posts = await PostModel.find({ tags: tagname }).populate('user').sort({ viewsCount: -1 });
+    const posts = await PostModel.find({ tags: tagname })
+      .populate('user', '_id fullName email avatarUrl')
+      .sort({ viewsCount: -1 });
+
     res.json(posts);
   } catch (err) {
     console.log(err);
@@ -156,7 +164,7 @@ export const getAllWithTagByDate = async (req, res) => {
 export const getAll = async (req, res) => {
   console.warn('WARNING! Calling deprecated function!');
   try {
-    const posts = await PostModel.find().populate('user').exec();
+    const posts = await PostModel.find().populate('user', '_id fullName email avatarUrl').exec();
 
     res.json(posts);
   } catch (err) {
