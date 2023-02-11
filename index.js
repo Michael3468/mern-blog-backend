@@ -25,7 +25,6 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/uploads', express.static('uploads')); // use static folder 'uploads'
 
 app.listen(4444, (err) => {
   if (err) {
@@ -43,12 +42,15 @@ app.get('/', (req, res) => {
 // server test (can be deleted) -
 
 // upload files to server +
+const UPLOADS_DIR = 'uploads';
+app.use('/uploads', express.static(UPLOADS_DIR)); // use static folder 'uploads'
+
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
-    if (!fs.existsSync('uploads')) {
-      fs.mkdirSync('uploads');
+    if (!fs.existsSync(UPLOADS_DIR)) {
+      fs.mkdirSync(UPLOADS_DIR);
     }
-    cb(null, 'uploads');
+    cb(null, UPLOADS_DIR);
   },
   filename: (_, file, cb) => {
     cb(null, file.originalname);
@@ -56,17 +58,17 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+  res.json({
+    url: `/${UPLOADS_DIR}/${req.file.originalname}`,
+  });
+});
 // upload files to server -
 
 app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
 app.post('/auth/login', loginValidation, handleValidationErrors, UserController.login);
 app.get('/auth/me', checkAuth, UserController.getMe);
-
-app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
-  res.json({
-    url: `/uploads/${req.file.originalname}`,
-  });
-});
 app.get('/tags', PostController.getLastTags);
 app.get('/posts', PostController.getAllSortedByDate);
 app.get('/popular-posts', PostController.getAllSortedByPopularity);
