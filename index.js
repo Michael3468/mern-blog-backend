@@ -37,7 +37,7 @@ app.listen(4444, (err) => {
 
 // server test (can be deleted) +
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send('Server working');
 });
 // server test (can be deleted) -
 
